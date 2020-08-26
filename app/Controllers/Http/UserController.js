@@ -5,7 +5,7 @@ class UserController {
   async index({ response }) {
     const users = await User.all()
     return response.json({
-      users
+      data: users
     })
   }
 
@@ -15,6 +15,13 @@ class UserController {
     const user = await User.create(data)
 
     return response.json(user)
+  }
+
+  async show({ auth, response }) {
+    const user = await auth.getUser()
+    return response.json({
+      data: user
+    })
   }
 
   async login({ request, auth, response }) {
