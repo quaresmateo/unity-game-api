@@ -45,16 +45,33 @@ class UserController {
   }
 
   async update({ request, response, auth }) {
-    const user = await auth.current.user
-    const data = request.only(['username', 'email', 'password'])
+    const user = auth.current.user
 
-    await user.merge(data)
+    const verifyPassword = await Hash.verify(
+      request.input('currentPassword'),
+      user.password
+    )
+
+    if (!verifyPassword) {
+      return response.status(400).json({
+        status: 'error',
+        message:
+          'Não foi possível verificar a senha atual! Por favor, tente novamente',
+      })
+    }
+
+    user.merge(request.only(['username', 'email']))
+
+    const newPassword = request.input('newPassword')
+    if (newPassword) {
+      user.password = newPassword
+    }
+
     await user.save()
 
     return response.status(200).json({
-      message: 'atualizado com sucesso'
+      message: 'atualizado com sucesso',
     })
-  }
 }
 
 module.exports = UserController
