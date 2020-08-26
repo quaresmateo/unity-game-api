@@ -17,8 +17,9 @@
 const Route = use('Route')
 
 Route.group(() => {
+  Route.post('/login', 'UserController.login')
   Route.post('/usuario', 'UserController.create')
-  Route.get('/usuarios', 'UserController.').middleware('auth:jwt')
-
+  Route.get('/usuario', 'UserController.show').middleware('auth')
+  Route.get('/usuarios', 'UserController.index').middleware('auth')
   Route.put('/usuario', 'UserController.update').middleware('auth')
 }).prefix('api/v1')
