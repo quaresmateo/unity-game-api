@@ -56,7 +56,7 @@ class UserController {
       return response.status(400).json({
         status: 'error',
         message:
-          'Não foi possível verificar a senha atual! Por favor, tente novamente',
+          'Não foi possível verificar a senha atual! Por favor, tente novamente'
       })
     }
 
@@ -70,8 +70,9 @@ class UserController {
     await user.save()
 
     return response.status(200).json({
-      message: 'atualizado com sucesso',
+      message: 'atualizado com sucesso'
     })
+  }
 }
 
 module.exports = UserController
