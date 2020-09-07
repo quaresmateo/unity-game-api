@@ -12,32 +12,14 @@ class UserController {
   }
 
   async create({ request, response }) {
-    let institution = null
-    const institutionName = request.only(['institution']).toLowerCase().trim()
     const data = request.only([
       'username',
       'email',
       'password',
       'fullname',
-      'profession'
+      'profession',
+      'institution'
     ])
-
-    if (institutionName) {
-      institution =
-        (await Database.table('institutions')
-          .where('name', institutionName)
-          .first()) ||
-        (await Database.table('institutions').insert({
-          name: institutionName
-        }))
-    } else {
-      return response.status(400).json({
-        status: 'error',
-        message: 'Institution is required'
-      })
-    }
-
-    data.institution = institution.id
 
     const user = await User.create(data)
 
