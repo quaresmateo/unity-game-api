@@ -6,10 +6,9 @@ const Schema = use('Schema')
 class InstitutionSchema extends Schema {
   up() {
     this.create('institutions', (table) => {
+      table.increments()
       table.string('name').notNullable()
       table.string('locale')
-      table.increments()
-      table.timestamps()
     })
   }
 
