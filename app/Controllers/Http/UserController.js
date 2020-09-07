@@ -1,6 +1,7 @@
 'use strict'
 const User = use('App/Models/User')
 const Hash = use('Hash')
+const Database = use('Database')
 
 class UserController {
   async index({ response }) {
@@ -11,7 +12,14 @@ class UserController {
   }
 
   async create({ request, response }) {
-    const data = request.only(['username', 'email', 'password', 'type'])
+    const data = request.only([
+      'username',
+      'email',
+      'password',
+      'fullname',
+      'profession',
+      'institution'
+    ])
 
     const user = await User.create(data)
 
