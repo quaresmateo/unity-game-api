@@ -26,9 +26,9 @@ class PlayerSchema extends Schema {
         ])
         .notNullable()
       table.string('diagnosis', ['longtext'])
+      table.timestamps()
 
       table.foreign('user_id').references('users.id').onDelete('cascade')
-      table.timestamps()
     })
   }
 
