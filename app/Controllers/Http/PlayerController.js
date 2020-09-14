@@ -43,22 +43,16 @@ class PlayerController {
     const user = await auth.getUser()
     const user_id = user.id
 
-    try {
-      const player = await Player.create({
-        user_id,
-        ...request.only([
-          'fullname',
-          'identification',
-          'date_of_birth',
-          'kind_of_handicap ',
-          'diagnosis'
-        ])
-      })
-    } catch (error) {
-      return response.json({
-        message: 'Ocorreu um erro'
-      })
-    }
+    const player = await Player.create({
+      user_id,
+      ...request.only([
+        'fullname',
+        'identification',
+        'date_of_birth',
+        'kind_of_handicap ',
+        'diagnosis'
+      ])
+    })
 
     return response.status(201).json({
       message: 'Jogador cadastrado com sucesso.',
