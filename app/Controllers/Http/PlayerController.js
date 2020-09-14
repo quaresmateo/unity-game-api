@@ -39,7 +39,7 @@ class PlayerController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {
+  async store({ request, response, auth }) {
     const user = await auth.getUser()
     const user_id = user.id
 
