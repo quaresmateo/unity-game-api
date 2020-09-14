@@ -3,7 +3,6 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-const Player = use('App/Models/Player')
 
 /**
  * Resourceful controller for interacting with quebracabecaplayersettings
@@ -22,32 +21,7 @@ class QuebraCabecaPlayerSettingController {
 
   async create({ request, response }) {}
 
-  async store({ request, response, auth }) {
-    const user = await auth.getUser()
-    const user_id = user.id
-
-    try {
-      const player = await Player.create({
-        user_id,
-        ...request.only([
-          'fullname',
-          'identification',
-          'date_of_birth',
-          'kind_of_handicap ',
-          'diagnosis'
-        ])
-      })
-
-      return response.status(201).json({
-        message: 'Jogador cadastrado com sucesso.',
-        data: player
-      })
-    } catch (error) {
-      return response.json({
-        message: 'Ocorreu um erro'
-      })
-    }
-  }
+  async store({ request, response, auth }) {}
 
   /**
    * Display a single quebracabecaplayersetting.
