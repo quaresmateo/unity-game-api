@@ -17,9 +17,15 @@
 const Route = use('Route')
 
 Route.group(() => {
+  // Auth routes
   Route.post('/login', 'UserController.login')
   Route.post('/usuario', 'UserController.create')
+
+  // User routes
   Route.get('/usuario', 'UserController.show').middleware('auth')
   Route.get('/usuarios', 'UserController.index').middleware('auth')
   Route.put('/usuario', 'UserController.update').middleware('auth')
+
+  // Player routes
+  Route.post('/jogador', 'PlayerController.store').middleware('auth')
 }).prefix('api/v1')
