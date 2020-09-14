@@ -49,7 +49,7 @@ class PlayerController {
         'fullname',
         'identification',
         'date_of_birth',
-        'kind_of_handicap ',
+        'kind_of_handicap',
         'diagnosis'
       ])
     })
