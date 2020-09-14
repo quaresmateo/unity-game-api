@@ -34,11 +34,22 @@ class UserController {
   }
 
   async login({ request, auth, response }) {
-    const { email, password } = request.all()
+    let user = null
+    const { email, username, password } = request.all()
+
+    if (email) {
+      user = await User.findByOrFail('email', email)
+    } else if (username) {
+      user = await User.findByOrFail('username', username)
+    } else {
+      return response.status(400).json({
+        status: 'error',
+        message: 'Erro: invalid email or username'
+      })
+    }
 
     try {
-      if (await auth.attempt(email, password)) {
-        const user = await User.findBy('email', email)
+      if (await auth.attempt(user.email, password)) {
         const token = await auth.generate(user)
         return response.json({
           data: token,
