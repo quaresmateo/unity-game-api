@@ -8,8 +8,12 @@ class Game extends Model {
     return this.hasOne('App/Models/Category')
   }
 
-  playerSetting() {
+  QuebraCabecaPlayerSetting() {
     return this.hasOne('App/Models/QuebraCabecaPlayerSetting')
+  }
+
+  CucaFrescaPlayerSetting() {
+    return this.hasOne('App/Models/CucaFrescaPlayerSetting')
   }
 }
 
