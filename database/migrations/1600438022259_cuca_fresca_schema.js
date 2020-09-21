@@ -3,12 +3,12 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class CucaFrescaPlayerSettingSchema extends Schema {
+class CucaFrescaSchema extends Schema {
   up() {
-    this.create('cuca_fresca_player_settings', (table) => {
+    this.create('cuca_fresca', (table) => {
       table.increments()
       table.integer('player_id').unsigned().notNullable()
-      table.integer('game_id').unsigned().notNullable()
+      table.integer('category_id').unsigned().notNullable()
       table.string('selected_theme', 20)
       table.integer('pair_numbers')
       table.integer('display_time')
@@ -22,13 +22,16 @@ class CucaFrescaPlayerSettingSchema extends Schema {
       table.timestamps()
 
       table.foreign('player_id').references('players.id').onDelete('cascade')
-      table.foreign('game_id').references('games.id').onDelete('cascade')
+      table
+        .foreign('category_id')
+        .references('categories.id')
+        .onDelete('cascade')
     })
   }
 
   down() {
-    this.drop('cuca_fresca_player_settings')
+    this.drop('cuca_fresca')
   }
 }
 
-module.exports = CucaFrescaPlayerSettingSchema
+module.exports = CucaFrescaSchema

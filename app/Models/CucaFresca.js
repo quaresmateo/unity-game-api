@@ -3,10 +3,10 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class CucaFrescaPlayerSetting extends Model {
+class CucaFresca extends Model {
   player() {
     return this.hasOne('Model/App/Player')
   }
 }
 
-module.exports = CucaFrescaPlayerSetting
+module.exports = CucaFresca

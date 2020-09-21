@@ -3,7 +3,7 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class QuebraCabeca extends Schema {
+class QuebraCabecaSchema extends Schema {
   up() {
     this.create('quebra_cabeca', (table) => {
       table.increments()
@@ -34,4 +34,4 @@ class QuebraCabeca extends Schema {
   }
 }
 
-module.exports = QuebraCabeca
+module.exports = QuebraCabecaSchema
