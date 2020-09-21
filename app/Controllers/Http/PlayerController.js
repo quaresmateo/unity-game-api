@@ -9,7 +9,12 @@ const Database = use('Database')
 
 class PlayerController {
   async index({ request, response, auth }) {
-    const players = await Player.all()
+    const user = await auth.getUser()
+    const { kind_of_handicap } = request.all()
+
+    const players = kind_of_handicap
+      ? await Player.query().where('kind_of_handicap', kind_of_handicap).fetch()
+      : await Player.query().where('user_id', user.id).fetch()
 
     return response.json({
       data: players
