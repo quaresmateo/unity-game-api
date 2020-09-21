@@ -28,4 +28,5 @@ Route.group(() => {
 
   // Player routes
   Route.post('/jogador', 'PlayerController.store').middleware('auth')
+  Route.get('/jogadores', 'PlayerController.index').middleware('auth')
 }).prefix('api/v1')
