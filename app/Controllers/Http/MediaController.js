@@ -4,7 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-class MediaControllert {
+class MediaController {
   index({ request, response }) {}
 
   async create({ request, response }) {}
@@ -20,4 +20,4 @@ class MediaControllert {
   async destroy({ params, request, response }) {}
 }
 
-module.exports = MediaControllert
+module.exports = MediaController
