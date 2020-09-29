@@ -4,14 +4,21 @@
 const Schema = use('Schema')
 
 class InstitutionSchema extends Schema {
-  up () {
+  up() {
     this.create('institutions', (table) => {
       table.increments()
+      table.string('name', 120).notNullable()
+      table
+        .string('user_id', 120)
+        .notNullable()
+        .comment('necessário para identificar quem criou a instituição')
       table.timestamps()
+
+      table.foreign('user_id').references('users.id')
     })
   }
 
-  down () {
+  down() {
     this.drop('institutions')
   }
 }
