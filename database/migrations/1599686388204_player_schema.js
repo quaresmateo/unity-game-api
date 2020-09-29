@@ -11,9 +11,11 @@ class PlayerSchema extends Schema {
         .integer('user_id')
         .unsigned()
         .notNullable()
+        .unique()
         .comment('id do profissional')
       table.string('fullname').notNullable()
-      table.string('identification').notNullable().comment('RG/CPF')
+      table.string('username').notNullable().unique()
+      table.string('identification').notNullable().unique().comment('RG/CPF')
       table.datetime('date_of_birth', { precision: 6 }).notNullable()
       table
         .enu('kind_of_handicap', [
