@@ -31,6 +31,7 @@ class PlayerController {
       user_id,
       ...request.only([
         'fullname',
+        'username',
         'identification',
         'date_of_birth',
         'kind_of_handicap',
