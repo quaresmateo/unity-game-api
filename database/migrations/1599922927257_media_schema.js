@@ -7,9 +7,12 @@ class MediaSchema extends Schema {
   up() {
     this.create('media', (table) => {
       table.increments()
-      table.string('src').notNullable()
-      table.string('title').notNullable()
+      table.string('extension').notNullable()
+      table.string('local_layout').notNullable()
+      table.integer('theme_id').unsigned()
       table.timestamps()
+
+      table.foreign('theme_id').references('themes.id').onDelete()
     })
   }
 
