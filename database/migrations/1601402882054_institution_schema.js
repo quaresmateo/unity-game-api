@@ -14,7 +14,7 @@ class InstitutionSchema extends Schema {
         .comment('necessário para identificar quem criou a instituição')
       table.timestamps()
 
-      table.foreign('user_id').references('users.id')
+      table.foreign('user_id').references('users.id').onDelete('cascade')
     })
   }
 
