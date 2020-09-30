@@ -17,7 +17,7 @@ class MediaSchema extends Schema {
   }
 
   down() {
-    this.drop('images')
+    this.drop('images') // remover depois de: node ace migration:reset
     this.drop('media')
   }
 }
