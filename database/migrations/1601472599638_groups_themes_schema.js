@@ -7,8 +7,8 @@ class GroupsThemesSchema extends Schema {
   up() {
     this.create('groups_themes', (table) => {
       table.increments()
-      table.integer('theme_id').insigned()
-      table.integer('group_id').insigned()
+      table.integer('theme_id').unsigned()
+      table.integer('group_id').unsigned()
       table.timestamps()
 
       table.foreign('theme_id').references('themes.id').onDelete('cascade')
