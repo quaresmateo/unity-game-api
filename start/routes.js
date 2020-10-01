@@ -19,7 +19,7 @@ const Route = use('Route')
 Route.group(() => {
   // Auth routes
   Route.post('/login', 'UserController.login')
-  Route.post('/usuario', 'UserController.create')
+  Route.post('/usuario', 'UserController.store')
 
   // User routes
   Route.get('/usuario', 'UserController.show').middleware('auth')

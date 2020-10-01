@@ -1,7 +1,7 @@
 'use strict'
 const User = use('App/Models/User')
+const Instition = use('App/Models/Institution')
 const Hash = use('Hash')
-const Database = use('Database')
 
 class UserController {
   async index({ response }) {
@@ -11,14 +11,15 @@ class UserController {
     })
   }
 
-  async create({ request, response }) {
+  async store({ request, response }) {
     const data = request.only([
       'username',
       'email',
       'password',
       'fullname',
       'profession',
-      'institution'
+      'institution',
+      'role'
     ])
 
     const user = await User.create(data)
@@ -80,7 +81,16 @@ class UserController {
       })
     }
 
-    user.merge(request.only(['username', 'email']))
+    user.merge(
+      request.only([
+        'username',
+        'email',
+        'fullname',
+        'profession',
+        'institution',
+        'role'
+      ])
+    )
 
     const newPassword = request.input('newPassword')
     if (newPassword) {
