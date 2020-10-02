@@ -18,7 +18,7 @@ class UserController {
       'password',
       'fullname',
       'profession',
-      'institution',
+      'institution_id',
       'role'
     ])
 
