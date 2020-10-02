@@ -15,11 +15,11 @@ class UserSchema extends Schema {
       table
         .string('role', ['responsible', 'professional'])
         .defaultTo('professional')
-      table.integer('institution').unsigned()
+      table.integer('institution_id').unsigned()
       table.timestamps()
 
       table
-        .foreign('institution')
+        .foreign('institution_id')
         .references('instituitions.id')
         .onDelete('cascade')
     })
