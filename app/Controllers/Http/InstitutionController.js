@@ -35,12 +35,14 @@ class InstitutionController {
 
   async update({ params, request, response }) {
     const institution = await Institution.findOrFail(params.id)
+    const institutionOldName = institution.name
 
     institution.merge(request.only(['name']))
+    institution.save()
 
     return response.json({
       data: institution,
-      message: `Instituição '${institution.name}' foi atualizada`
+      message: `Instituição '${institutionOldName}' foi atualizada para '${institution.name}'`
     })
   }
 
