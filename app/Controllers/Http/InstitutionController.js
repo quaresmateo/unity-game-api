@@ -35,9 +35,10 @@ class InstitutionController {
 
   async destroy({ params, response }) {
     const institution = await Institution.findOrFail(params.id)
+    const institutionName = institution.name
     await institution.delete()
     return response.json({
-      message: 'Instituição deletada'
+      message: `Instituição '${institutionName}' deletada`
     })
   }
 }
