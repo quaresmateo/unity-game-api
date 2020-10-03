@@ -32,4 +32,5 @@ Route.group(() => {
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
+  Route.get('/instituicoes', 'InstitutionController.index')
 }).prefix('api/v1')
