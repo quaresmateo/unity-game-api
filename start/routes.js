@@ -32,6 +32,7 @@ Route.group(() => {
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
+  Route.put('/instituicao', 'InstitutionController.update').middleware('auth')
   Route.delete('/instituicao/:id', 'InstitutionController.destroy').middleware(
     'auth'
   )
