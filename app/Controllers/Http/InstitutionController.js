@@ -6,7 +6,14 @@
 const Institution = use('App/Models/Institution')
 
 class InstitutionController {
-  async index({ request, response, view }) {}
+  async index({ response }) {
+    const institutions = await Institution.query().with('whoCreated').fetch()
+
+    return response.json({
+      data: institutions,
+      message: 'Ok'
+    })
+  }
 
   async create({ request, response, view }) {}
 
