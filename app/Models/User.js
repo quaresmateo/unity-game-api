@@ -38,6 +38,10 @@ class User extends Model {
   players() {
     return this.hasMany('App/Models/Player')
   }
+
+  institution() {
+    return this.belongsTo('App/Models/Institution')
+  }
 }
 
 module.exports = User

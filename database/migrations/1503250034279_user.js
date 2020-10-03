@@ -11,9 +11,17 @@ class UserSchema extends Schema {
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.string('fullname', 120).notNullable()
-      table.string('profession', 120).notNullable()
-      table.string('institution', 120).notNullable()
+      table.string('profession', 120)
+      table
+        .string('role', ['responsible', 'professional'])
+        .defaultTo('professional')
+      table.integer('institution_id').unsigned()
       table.timestamps()
+
+      table
+        .foreign('institution_id')
+        .references('instituitions.id')
+        .onDelete('cascade')
     })
   }
 

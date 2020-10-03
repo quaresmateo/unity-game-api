@@ -4,8 +4,8 @@
 const Model = use('Model')
 
 class QuebraCabeca extends Model {
-  image() {
-    return this.hasOne('App/Models/Image')
+  media() {
+    return this.hasOne('App/Models/Media')
   }
 
   player() {

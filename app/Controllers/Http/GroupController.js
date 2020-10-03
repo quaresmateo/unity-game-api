@@ -5,12 +5,12 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 /**
- * Resourceful controller for interacting with images
+ * Resourceful controller for interacting with groups
  */
-class ImageController {
+class GroupController {
   /**
-   * Show a list of all images.
-   * GET images
+   * Show a list of all groups.
+   * GET groups
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -21,8 +21,8 @@ class ImageController {
   }
 
   /**
-   * Render a form to be used for creating a new image.
-   * GET images/create
+   * Render a form to be used for creating a new group.
+   * GET groups/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -33,8 +33,8 @@ class ImageController {
   }
 
   /**
-   * Create/save a new image.
-   * POST images
+   * Create/save a new group.
+   * POST groups
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -44,8 +44,8 @@ class ImageController {
   }
 
   /**
-   * Display a single image.
-   * GET images/:id
+   * Display a single group.
+   * GET groups/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -56,8 +56,8 @@ class ImageController {
   }
 
   /**
-   * Render a form to update an existing image.
-   * GET images/:id/edit
+   * Render a form to update an existing group.
+   * GET groups/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -68,8 +68,8 @@ class ImageController {
   }
 
   /**
-   * Update image details.
-   * PUT or PATCH images/:id
+   * Update group details.
+   * PUT or PATCH groups/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -79,8 +79,8 @@ class ImageController {
   }
 
   /**
-   * Delete a image with id.
-   * DELETE images/:id
+   * Delete a group with id.
+   * DELETE groups/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -90,4 +90,4 @@ class ImageController {
   }
 }
 
-module.exports = ImageController
+module.exports = GroupController

@@ -19,7 +19,7 @@ const Route = use('Route')
 Route.group(() => {
   // Auth routes
   Route.post('/login', 'UserController.login')
-  Route.post('/usuario', 'UserController.create')
+  Route.post('/usuario', 'UserController.store')
 
   // User routes
   Route.get('/usuario', 'UserController.show').middleware('auth')
@@ -29,4 +29,14 @@ Route.group(() => {
   // Player routes
   Route.post('/jogador', 'PlayerController.store').middleware('auth')
   Route.get('/jogadores', 'PlayerController.index').middleware('auth')
+
+  // Institution routes
+  Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
+  Route.put('/instituicao/:id', 'InstitutionController.update').middleware(
+    'auth'
+  )
+  Route.delete('/instituicao/:id', 'InstitutionController.destroy').middleware(
+    'auth'
+  )
+  Route.get('/instituicoes', 'InstitutionController.index')
 }).prefix('api/v1')
