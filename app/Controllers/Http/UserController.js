@@ -5,7 +5,7 @@ const Hash = use('Hash')
 
 class UserController {
   async index({ response }) {
-    const users = await User.all()
+    const users = await User.query().with('institution').fetch()
     return response.json({
       data: users
     })
