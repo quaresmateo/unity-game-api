@@ -33,7 +33,13 @@ class InstitutionController {
 
   async update({ params, request, response }) {}
 
-  async destroy({ params, request, response }) {}
+  async destroy({ params, response }) {
+    const institution = await Institution.findOrFail(params.id)
+    await institution.delete()
+    return response.json({
+      message: 'Instituição deletada'
+    })
+  }
 }
 
 module.exports = InstitutionController
