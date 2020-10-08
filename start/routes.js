@@ -17,6 +17,12 @@
 const Route = use('Route')
 
 Route.group(() => {
+  Route.get(
+    '/',
+    () =>
+      'API do Jogos Adaptáveis - Documentação disponível em  https://documenter.getpostman.com/view/6331039/TVCmQjYG'
+  )
+
   // Auth routes
   Route.post('/login', 'UserController.login')
   Route.post('/usuario', 'UserController.store')
@@ -29,6 +35,9 @@ Route.group(() => {
   // Player routes
   Route.post('/jogador', 'PlayerController.store').middleware('auth')
   Route.get('/jogadores', 'PlayerController.index').middleware('auth')
+
+  // Themes routes
+  Route.post('/themes', 'ThemeController.store').middleware('auth')
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')

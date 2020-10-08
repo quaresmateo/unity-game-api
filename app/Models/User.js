@@ -42,6 +42,10 @@ class User extends Model {
   institution() {
     return this.belongsTo('App/Models/Institution')
   }
+
+  themes() {
+    return this.belongsToMany('App/Models/Theme').pivotTable('themes_users')
+  }
 }
 
 module.exports = User
