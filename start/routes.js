@@ -17,6 +17,12 @@
 const Route = use('Route')
 
 Route.group(() => {
+  Route.get(
+    '/',
+    () =>
+      'API do Jogos Adaptáveis - Documentação disponível em  https://documenter.getpostman.com/view/6331039/TVCmQjYG'
+  )
+
   // Auth routes
   Route.post('/login', 'UserController.login')
   Route.post('/usuario', 'UserController.store')
