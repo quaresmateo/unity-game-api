@@ -36,6 +36,9 @@ Route.group(() => {
   Route.post('/jogador', 'PlayerController.store').middleware('auth')
   Route.get('/jogadores', 'PlayerController.index').middleware('auth')
 
+  // Themes routes
+  Route.post('/themes', 'ThemeController.store').middleware('auth')
+
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
   Route.put('/instituicao/:id', 'InstitutionController.update').middleware(
