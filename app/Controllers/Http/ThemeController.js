@@ -14,8 +14,7 @@ class ThemeController {
   async create({ request, response, view }) {}
 
   async store({ request, response, auth }) {
-    const current_user = auth.user
-    const user_id = current_user.id
+    const user_id = auth.user.id
     const data = { ...request.only(['name']), user_id }
     const theme = await Theme.create(data)
     const groups = request.only(['groups_id'])
