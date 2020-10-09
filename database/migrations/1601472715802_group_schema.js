@@ -4,14 +4,18 @@
 const Schema = use('Schema')
 
 class GroupSchema extends Schema {
-  up () {
+  up() {
     this.create('groups', (table) => {
       table.increments()
+      table.string('name').notNullable()
+      table.integer('user_id').unsigned()
       table.timestamps()
+
+      table.foreign('user_id').references('users.id').onDelete('cascade')
     })
   }
 
-  down () {
+  down() {
     this.drop('groups')
   }
 }
