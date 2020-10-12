@@ -17,9 +17,8 @@ class GroupController {
     const { name, players_ids } = request.all()
     const group = await Group.create({ name, user_id })
 
-    //está bugado: solução fazer query direto
     players_ids.forEach(async (player_id) => {
-      const player = await Player().findOrFail(player_id)
+      const player = await Player.findOrFail(player_id)
       await group.players().attach([player.id])
     })
 
