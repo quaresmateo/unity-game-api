@@ -2,7 +2,7 @@
 
 const User = use('App/Models/User')
 const Theme = use('App/Models/Theme')
-// const Group = use('App/Models/Group')
+const Group = use('App/Models/Group')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -14,19 +14,18 @@ class ThemeController {
   async create({ request, response, view }) {}
 
   async store({ request, response, auth }) {
-    const current_user = auth.user
-    const user_id = current_user.id
+    const user_id = auth.user.id
     const data = { ...request.only(['name']), user_id }
     const theme = await Theme.create(data)
-    const groups = request.only(['groups_id'])
+    const { groups_id: groups } = request.all()
+    console.log(groups)
 
-    // Aguardando implementação de GroupController
-    // for (group_id in groups) {
-    //   const group = await Group().findOrFail(group_id)
-    //   await theme.groups().attach([group.id])
-    // }
+    groups.forEach(async (group_id) => {
+      const group = await Group.findOrFail(group_id)
+      await theme.groups().attach([group.id])
+    })
 
-    const user = await User.findOrFail(current_user.id)
+    const user = await User.findOrFail(user_id)
     await user.themes().attach([theme.id])
 
     return response.json({

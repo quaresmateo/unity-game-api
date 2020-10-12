@@ -7,6 +7,10 @@ class Theme extends Model {
   whoCreated() {
     return this.hasOne('App/Models/User')
   }
+
+  groups() {
+    return this.belongsToMany('App/Models/Group').pivotTable('groups_themes')
+  }
 }
 
 module.exports = Theme

@@ -11,7 +11,6 @@ class PlayerSchema extends Schema {
         .integer('user_id')
         .unsigned()
         .notNullable()
-        .unique()
         .comment('id do profissional')
       table.string('fullname').notNullable()
       table.string('username').notNullable().unique()
