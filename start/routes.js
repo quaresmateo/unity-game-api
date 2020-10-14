@@ -37,8 +37,9 @@ Route.group(() => {
   Route.get('/jogadores', 'PlayerController.index').middleware('auth')
 
   // Themes routes
-  Route.get('/themes', 'ThemeController.index').middleware('auth')
-  Route.post('/themes', 'ThemeController.store').middleware('auth')
+  Route.get('/temas', 'ThemeController.index').middleware('auth')
+  Route.post('/temas', 'ThemeController.store').middleware('auth')
+  Route.delete('/temas/:id', 'ThemeController.destroy').middleware('auth')
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
