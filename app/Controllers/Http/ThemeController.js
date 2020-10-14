@@ -9,7 +9,14 @@ const Group = use('App/Models/Group')
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 class ThemeController {
-  async index({ request, response, view }) {}
+  async index({ request, response }) {
+    const theme = await Theme.all()
+
+    return response.json({
+      data: theme,
+      message: 'Ok'
+    })
+  }
 
   async create({ request, response, view }) {}
 
