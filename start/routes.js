@@ -37,6 +37,7 @@ Route.group(() => {
   Route.get('/jogadores', 'PlayerController.index').middleware('auth')
 
   // Themes routes
+  Route.get('/themes', 'ThemeController.index').middleware('auth')
   Route.post('/themes', 'ThemeController.store').middleware('auth')
 
   // Institution routes
