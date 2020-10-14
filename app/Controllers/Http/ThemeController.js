@@ -45,7 +45,16 @@ class ThemeController {
 
   async update({ params, request, response }) {}
 
-  async destroy({ params, request, response }) {}
+  async destroy({ params, response }) {
+    const theme = await Theme.findOrFail(params.id)
+    const themeName = theme.name
+
+    await theme.delete()
+
+    return response.json({
+      message: `Tema '${themeName}' deletado`
+    })
+  }
 }
 
 module.exports = ThemeController
