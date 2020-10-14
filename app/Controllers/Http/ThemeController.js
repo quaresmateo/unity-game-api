@@ -18,8 +18,6 @@ class ThemeController {
     })
   }
 
-  async create({ request, response, view }) {}
-
   async store({ request, response, auth }) {
     const user_id = auth.user.id
     const data = { ...request.only(['name']), user_id }
