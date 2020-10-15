@@ -8,9 +8,14 @@ const Group = use('App/Models/Group')
 const Player = use('App/Models/Player')
 
 class GroupController {
-  async index({ request, response }) {}
+  async index({ request, response }) {
+    const group = await Group.all()
 
-  async create({ request, response, view }) {}
+    return response.json({
+      data: group,
+      message: 'Ok'
+    })
+  }
 
   async store({ request, response, auth }) {
     const user_id = auth.user.id
