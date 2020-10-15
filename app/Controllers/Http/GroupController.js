@@ -8,7 +8,7 @@ const Group = use('App/Models/Group')
 const Player = use('App/Models/Player')
 
 class GroupController {
-  async index({ request, response, view }) {}
+  async index({ request, response }) {}
 
   async create({ request, response, view }) {}
 
