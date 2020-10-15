@@ -8,7 +8,7 @@ const Group = use('App/Models/Group')
 const Player = use('App/Models/Player')
 
 class GroupController {
-  async index({ request, response }) {
+  async index({ response }) {
     const group = await Group.all()
 
     return response.json({
@@ -39,7 +39,16 @@ class GroupController {
 
   async update({ params, request, response }) {}
 
-  async destroy({ params, request, response }) {}
+  async destroy({ params, response }) {
+    const group = await Group.findOrFail(params.id)
+    const groupName = group.name
+
+    await group.delete()
+
+    return response.json({
+      message: `Grupo '${groupName}' deletado`
+    })
+  }
 }
 
 module.exports = GroupController
