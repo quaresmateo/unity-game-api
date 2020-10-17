@@ -8,6 +8,10 @@ class Group extends Model {
     return this.belongsToMany('App/Models/Player').pivotTable('groups_players')
   }
 
+  users() {
+    return this.belongsToMany('App/Models/User').pivotTable('groups_users')
+  }
+
   themes() {
     return this.belongsToMany('App/Models/Theme').pivotTable('groups_themes')
   }

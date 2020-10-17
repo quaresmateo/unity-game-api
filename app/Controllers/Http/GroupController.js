@@ -5,22 +5,40 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Group = use('App/Models/Group')
+const User = use('App/Models/User')
 const Player = use('App/Models/Player')
 
 class GroupController {
-  async index({ request, response, view }) {}
+  async index({ request, response }) {
+    const { group_type } = request.all()
+    const type = group_type || 'users'
+    const group = await Group.query()
+      .where('group_type', type)
+      .with(type)
+      .fetch()
 
-  async create({ request, response, view }) {}
+    return response.json({
+      data: group,
+      message: 'Ok'
+    })
+  }
 
   async store({ request, response, auth }) {
     const user_id = auth.user.id
-    const { name, players_ids } = request.all()
-    const group = await Group.create({ name, user_id })
+    const { name, members_ids, group_type } = request.all()
+    const group = await Group.create({ name, user_id, group_type })
 
-    players_ids.forEach(async (player_id) => {
-      const player = await Player.findOrFail(player_id)
-      await group.players().attach([player.id])
-    })
+    if (group_type === 'players') {
+      members_ids.forEach(async (player_id) => {
+        const player = await Player.findOrFail(player_id)
+        await group.players().attach([player.id])
+      })
+    } else if (group_type === 'users') {
+      members_ids.forEach(async (user_id) => {
+        const user = await User.findOrFail(user_id)
+        await group.users().attach([user.id])
+      })
+    }
 
     return response.json({
       data: group,
@@ -34,7 +52,16 @@ class GroupController {
 
   async update({ params, request, response }) {}
 
-  async destroy({ params, request, response }) {}
+  async destroy({ params, response }) {
+    const group = await Group.findOrFail(params.id)
+    const groupName = group.name
+
+    await group.delete()
+
+    return response.json({
+      message: `Grupo '${groupName}' deletado`
+    })
+  }
 }
 
 module.exports = GroupController

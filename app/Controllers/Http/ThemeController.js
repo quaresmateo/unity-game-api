@@ -9,9 +9,14 @@ const Group = use('App/Models/Group')
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 class ThemeController {
-  async index({ request, response, view }) {}
+  async index({ request, response }) {
+    const theme = await Theme.all()
 
-  async create({ request, response, view }) {}
+    return response.json({
+      data: theme,
+      message: 'Ok'
+    })
+  }
 
   async store({ request, response, auth }) {
     const user_id = auth.user.id
@@ -40,7 +45,16 @@ class ThemeController {
 
   async update({ params, request, response }) {}
 
-  async destroy({ params, request, response }) {}
+  async destroy({ params, response }) {
+    const theme = await Theme.findOrFail(params.id)
+    const themeName = theme.name
+
+    await theme.delete()
+
+    return response.json({
+      message: `Tema '${themeName}' deletado`
+    })
+  }
 }
 
 module.exports = ThemeController

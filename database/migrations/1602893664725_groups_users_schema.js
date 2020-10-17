@@ -3,22 +3,22 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class GroupSchema extends Schema {
+class GroupsUsersSchema extends Schema {
   up() {
-    this.create('groups', (table) => {
+    this.create('groups_users', (table) => {
       table.increments()
-      table.string('name').notNullable()
       table.integer('user_id').unsigned()
-      table.enu('group_type', ['players', 'users']).notNullable()
+      table.integer('group_id').unsigned()
       table.timestamps()
 
       table.foreign('user_id').references('users.id').onDelete('cascade')
+      table.foreign('group_id').references('groups.id').onDelete('cascade')
     })
   }
 
   down() {
-    this.drop('groups')
+    this.drop('groups_users')
   }
 }
 
-module.exports = GroupSchema
+module.exports = GroupsUsersSchema

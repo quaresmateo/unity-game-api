@@ -37,7 +37,9 @@ Route.group(() => {
   Route.get('/jogadores', 'PlayerController.index').middleware('auth')
 
   // Themes routes
-  Route.post('/themes', 'ThemeController.store').middleware('auth')
+  Route.get('/temas', 'ThemeController.index').middleware('auth')
+  Route.post('/temas', 'ThemeController.store').middleware('auth')
+  Route.delete('/temas/:id', 'ThemeController.destroy').middleware('auth')
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
@@ -51,4 +53,6 @@ Route.group(() => {
 
   // Groups routes
   Route.post('/grupos', 'GroupController.store').middleware('auth')
+  Route.get('/grupos', 'GroupController.index').middleware('auth')
+  Route.delete('/grupos/:id', 'GroupController.destroy').middleware('auth')
 }).prefix('api/v1')
