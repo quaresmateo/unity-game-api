@@ -27,7 +27,7 @@ const Factory = use('Factory')
  *
  * Padrão de 1 até 5
  */
-function getRandomInt(min = 1, max = 5) {
+function getRandomInt(min = 1, max = 6) {
   return Math.floor(Math.random() * (max - min)) + min
 }
 
@@ -50,7 +50,7 @@ Factory.blueprint('App/Models/User', (faker) => {
       .split(' ')
       .join(faker.string({ length: 1, pool: '_.' })) + '@email.com'
   const userType = ['responsible', 'professional']
-  const role = userType[getRandomInt(0, 1)]
+  const role = userType[getRandomInt(0, 2)]
 
   return {
     fullname,
@@ -68,10 +68,10 @@ Factory.blueprint('App/Models/Player', (faker) => {
   const username =
     fullname.split(' ')[0].toLowerCase() +
     faker.string({ length: 3, pool: '_123456789' })
-  const date_of_birth = `${getRandomInt(1, 27)}-${getRandomInt(
-    1,
-    12
-  )}-${getRandomInt(2000, 2018)}`
+  const day = getRandomInt(1, 26)
+  const month = getRandomInt(0, 12)
+  const year = getRandomInt(2000, 2018)
+  const date_of_birth = new Date(`${month}-${day}-${year}`)
   const koh_types = [
     'visual',
     'física',
