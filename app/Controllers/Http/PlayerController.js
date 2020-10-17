@@ -5,19 +5,23 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Player = use('App/Models/Player')
-const Database = use('Database')
 
 class PlayerController {
   async index({ request, response, auth }) {
     const user = await auth.getUser()
-    const { kind_of_handicap } = request.all()
+    const { kind_of_handicap, all } = request.all()
+    let players = null
 
-    const players = kind_of_handicap
-      ? await Player.query()
-          .where('user_id', user.id)
-          .where('kind_of_handicap', kind_of_handicap)
-          .fetch()
-      : await Player.query().where('user_id', user.id).fetch()
+    if (all == 'true') {
+      players = await Player.all()
+    } else {
+      players = kind_of_handicap
+        ? await Player.query()
+            .where('user_id', user.id)
+            .where('kind_of_handicap', kind_of_handicap)
+            .fetch()
+        : await Player.query().where('user_id', user.id).fetch()
+    }
 
     return response.json({
       data: players
