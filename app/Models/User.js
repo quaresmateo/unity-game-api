@@ -46,6 +46,10 @@ class User extends Model {
   themes() {
     return this.belongsToMany('App/Models/Theme').pivotTable('themes_users')
   }
+
+  groups() {
+    return this.belongsToMany('App/Models/Group').pivotTable('groups_players')
+  }
 }
 
 module.exports = User
