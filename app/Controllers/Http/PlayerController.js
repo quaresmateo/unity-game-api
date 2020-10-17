@@ -13,7 +13,10 @@ class PlayerController {
     const { kind_of_handicap } = request.all()
 
     const players = kind_of_handicap
-      ? await Player.query().where('kind_of_handicap', kind_of_handicap).fetch()
+      ? await Player.query()
+          .where('user_id', user.id)
+          .where('kind_of_handicap', kind_of_handicap)
+          .fetch()
       : await Player.query().where('user_id', user.id).fetch()
 
     return response.json({
