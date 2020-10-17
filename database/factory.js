@@ -31,3 +31,27 @@ Factory.blueprint('App/Models/Institution', (faker) => {
     user_id
   }
 })
+
+Factory.blueprint('App/Models/User', (faker) => {
+  const fullname = faker.name({ middle: true, nationality: 'it' })
+  const username =
+    fullname.split(' ')[0].toLowerCase() +
+    faker.string({ length: 3, pool: '_123456789' })
+  const email =
+    fullname
+      .toLowerCase()
+      .split(' ')
+      .join(faker.string({ length: 1, pool: '_.' })) + '@email.com'
+  const userType = ['responsible', 'professional']
+  const role = userType[getRandomInt(1, 2)]
+
+  return {
+    fullname,
+    username,
+    email,
+    role,
+    profession: faker.word(),
+    institution_id: getRandomInt(1, 5),
+    password: '123456'
+  }
+})
