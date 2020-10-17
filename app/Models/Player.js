@@ -7,6 +7,10 @@ class Player extends Model {
   groups() {
     return this.belongsToMany('App/Models/Group').pivotTable('groups_players')
   }
+
+  static get dates() {
+    return super.dates.concat(['date_of_birth'])
+  }
 }
 
 module.exports = Player
