@@ -5,6 +5,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Group = use('App/Models/Group')
+const User = use('App/Models/User')
 const Player = use('App/Models/Player')
 
 class GroupController {
@@ -19,13 +20,20 @@ class GroupController {
 
   async store({ request, response, auth }) {
     const user_id = auth.user.id
-    const { name, players_ids } = request.all()
-    const group = await Group.create({ name, user_id })
+    const { name, members_ids, group_type } = request.all()
+    const group = await Group.create({ name, user_id, group_type })
 
-    players_ids.forEach(async (player_id) => {
-      const player = await Player.findOrFail(player_id)
-      await group.players().attach([player.id])
-    })
+    if (group_type === 'players') {
+      members_ids.forEach(async (player_id) => {
+        const player = await Player.findOrFail(player_id)
+        await group.players().attach([player.id])
+      })
+    } else if (group_type === 'users') {
+      members_ids.forEach(async (user_id) => {
+        const user = await User.findOrFail(user_id)
+        await group.users().attach([user.id])
+      })
+    }
 
     return response.json({
       data: group,
