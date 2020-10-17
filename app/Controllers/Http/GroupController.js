@@ -9,8 +9,9 @@ const User = use('App/Models/User')
 const Player = use('App/Models/Player')
 
 class GroupController {
-  async index({ response }) {
-    const group = await Group.all()
+  async index({ request, response }) {
+    const { group_type } = request.all()
+    const group = await Group.query().where('group_type', group_type).fetch()
 
     return response.json({
       data: group,
