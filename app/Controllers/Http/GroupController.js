@@ -59,7 +59,7 @@ class GroupController {
 
     return response.json({
       data: group,
-      message: `Group '${groupOldName}' foi atualizado para '${group.name}'`
+      message: `Grupo '${groupOldName}' foi atualizado para '${group.name}'`
     })
   }
 
