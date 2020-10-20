@@ -54,8 +54,8 @@ class GroupController {
     const group = await Group.findOrFail(params.id)
     const groupOldName = group.name
 
-    institution.merge(request.only(['name']))
-    institution.save()
+    group.merge(request.only(['name']))
+    group.save()
 
     return response.json({
       data: group,
