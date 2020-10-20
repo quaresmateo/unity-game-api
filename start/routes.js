@@ -54,5 +54,6 @@ Route.group(() => {
   // Groups routes
   Route.post('/grupos', 'GroupController.store').middleware('auth')
   Route.get('/grupos', 'GroupController.index').middleware('auth')
+  Route.put('/grupos/:id', 'GroupController.update').middleware('auth')
   Route.delete('/grupos/:id', 'GroupController.destroy').middleware('auth')
 }).prefix('api/v1')
