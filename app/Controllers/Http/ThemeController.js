@@ -42,7 +42,26 @@ class ThemeController {
 
   async edit({ params, request, response, view }) {}
 
-  async update({ params, request, response }) {}
+  async update({ params, request, response }) {
+    const theme = await Theme.findOrFail(params.id)
+    const themeOldName = theme.name
+    const { groups_id: groups } = request.all()
+
+    // const themesGroups = await Theme.query().whereIn('group_id', groups)
+
+    // groups.forEach(async (group_id) => {
+    //   const group = await Group.findOrFail(group_id)
+    //   await theme.groups().attach([group.id])
+    // })
+
+    theme.merge(request.only(['name']))
+    theme.save()
+
+    return response.json({
+      data: theme,
+      message: `Tema '${themeOldName}' foi atualizado para '${theme.name}'`
+    })
+  }
 
   async destroy({ params, response }) {
     const theme = await Theme.findOrFail(params.id)
