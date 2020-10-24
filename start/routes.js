@@ -55,4 +55,11 @@ Route.group(() => {
   Route.post('/grupos', 'GroupController.store').middleware('auth')
   Route.get('/grupos', 'GroupController.index').middleware('auth')
   Route.delete('/grupos/:id', 'GroupController.destroy').middleware('auth')
+
+  // Category routes
+  Route.get('/categoria', 'CategoryController.index').middleware('auth')
+  Route.post('/categoria', 'CategoryController.store').middleware('auth')
+  Route.get('/categoria/:id', 'CategoryController.show').middleware('auth')
+  Route.put('/categoria/:id', 'CategoryController.update').middleware('auth')
+  Route.delete('/categoria/:id', 'CategoryController.destroy').middleware('auth')
 }).prefix('api/v1')
