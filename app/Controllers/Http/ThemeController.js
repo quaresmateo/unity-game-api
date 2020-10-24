@@ -47,12 +47,10 @@ class ThemeController {
     const themeOldName = theme.name
     const { groups_id: groups } = request.all()
 
-    // const themesGroups = await Theme.query().whereIn('group_id', groups)
-
-    // groups.forEach(async (group_id) => {
-    //   const group = await Group.findOrFail(group_id)
-    //   await theme.groups().attach([group.id])
-    // })
+    groups.forEach(async (group_id) => {
+      const group = await Group.findOrFail(group_id)
+      await theme.groups().sync([group.id])
+    })
 
     theme.merge(request.only(['name']))
     theme.save()
