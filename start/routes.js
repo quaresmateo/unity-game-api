@@ -40,6 +40,7 @@ Route.group(() => {
   Route.get('/temas', 'ThemeController.index').middleware('auth')
   Route.post('/temas', 'ThemeController.store').middleware('auth')
   Route.delete('/temas/:id', 'ThemeController.destroy').middleware('auth')
+  Route.put('/temas/:id', 'ThemeController.update').middleware('auth')
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
