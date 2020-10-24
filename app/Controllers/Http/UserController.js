@@ -103,6 +103,17 @@ class UserController {
       message: 'atualizado com sucesso'
     })
   }
+
+  async destroy({ params, response }) {
+    const user = await User.findOrFail(params.id)
+    const name = user.fullname
+
+    await user.delete()
+
+    return response.json({
+      message: `Usuário '${name}' deletado`
+    })
+  }
 }
 
 module.exports = UserController

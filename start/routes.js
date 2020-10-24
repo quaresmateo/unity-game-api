@@ -30,7 +30,8 @@ Route.group(() => {
   // User routes
   Route.get('/usuario', 'UserController.show').middleware('auth')
   Route.get('/usuarios', 'UserController.index').middleware('auth')
-  Route.put('/usuario', 'UserController.update').middleware('auth')
+  Route.put('/usuario/:id', 'UserController.update').middleware('auth')
+  Route.delete('/usuario/:id', 'UserController.destroy').middleware('auth')
 
   // Player routes
   Route.post('/jogador', 'PlayerController.store').middleware('auth')
@@ -63,5 +64,7 @@ Route.group(() => {
   Route.post('/categoria', 'CategoryController.store').middleware('auth')
   Route.get('/categoria/:id', 'CategoryController.show').middleware('auth')
   Route.put('/categoria/:id', 'CategoryController.update').middleware('auth')
-  Route.delete('/categoria/:id', 'CategoryController.destroy').middleware('auth')
+  Route.delete('/categoria/:id', 'CategoryController.destroy').middleware(
+    'auth'
+  )
 }).prefix('api/v1')
