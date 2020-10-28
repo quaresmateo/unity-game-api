@@ -56,7 +56,28 @@ class PlayerController {
 
   async edit({ params, request, response, view }) {}
 
-  async update({ params, request, response }) {}
+  async update({ params, request, response }) {
+    const player = await Player.findOrFail(params.id)
+    const playerOldName = player.username
+
+    player.merge(
+      request.only([
+        'username',
+        'fullname',
+        'identification',
+        'date_of_birth',
+        'kind_of_handicap',
+        'diagnosis'
+      ])
+    )
+
+    player.save()
+
+    return response.json({
+      message: `Dado(s) de ${playerOldName} alterado(s)`,
+      data: player
+    })
+  }
 
   async destroy({ params, request, response }) {}
 }
