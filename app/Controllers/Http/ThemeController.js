@@ -40,8 +40,6 @@ class ThemeController {
 
   async show({ params, request, response, view }) {}
 
-  async edit({ params, request, response, view }) {}
-
   async update({ params, request, response }) {
     const theme = await Theme.findOrFail(params.id)
     const themeOldName = theme.name

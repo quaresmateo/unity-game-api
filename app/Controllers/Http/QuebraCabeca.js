@@ -7,13 +7,9 @@
 class QuebraCabecaController {
   async index({ request, response, view }) {}
 
-  async create({ request, response }) {}
-
   async store({ request, response, auth }) {}
 
   async show({ params, request, response, view }) {}
-
-  async edit({ params, request, response, view }) {}
 
   async update({ params, request, response }) {}
 

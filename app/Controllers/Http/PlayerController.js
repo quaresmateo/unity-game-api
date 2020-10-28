@@ -79,7 +79,16 @@ class PlayerController {
     })
   }
 
-  async destroy({ params, request, response }) {}
+  async destroy({ params, response }) {
+    const player = await Player.findOrFail(params.id)
+    const { username } = player
+
+    await player.delete()
+
+    return response.json({
+      message: `O jogador ${username} foi excluído`
+    })
+  }
 }
 
 module.exports = PlayerController
