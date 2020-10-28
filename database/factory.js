@@ -92,3 +92,9 @@ Factory.blueprint('App/Models/Player', (faker) => {
     diagnosis: faker.paragraph({ setence: 3 })
   }
 })
+
+Factory.blueprint('App/Models/Category', (faker) => {
+  return {
+    category_name: faker.word()
+  }
+})
