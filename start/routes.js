@@ -35,7 +35,8 @@ Route.group(() => {
 
   // Player routes
   Route.post('/jogador', 'PlayerController.store').middleware('auth')
-  Route.get('/jogadores', 'PlayerController.index').middleware('auth')
+  Route.get('/jogador', 'PlayerController.index').middleware('auth')
+  Route.get('/jogador/:id', 'PlayerController.show').middleware('auth')
   Route.put('/jogador/:id', 'PlayerController.update').middleware('auth')
   Route.delete('/jogador/:id', 'PlayerController.destroy').middleware('auth')
 

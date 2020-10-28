@@ -28,8 +28,6 @@ class PlayerController {
     })
   }
 
-  async create({ request, response, view }) {}
-
   async store({ request, response, auth }) {
     const user = await auth.getUser()
     const user_id = user.id
@@ -52,9 +50,14 @@ class PlayerController {
     })
   }
 
-  async show({ params, request, response, view }) {}
+  async show({ params, response }) {
+    const player = await Player.findOrFail(params.id)
 
-  async edit({ params, request, response, view }) {}
+    return response.json({
+      data: player,
+      message: 'Ok'
+    })
+  }
 
   async update({ params, request, response }) {
     const player = await Player.findOrFail(params.id)
