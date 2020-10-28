@@ -48,6 +48,7 @@ Route.group(() => {
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
+  Route.get('/instituicao/:id', 'InstitutionController.show').middleware('auth')
   Route.put('/instituicao/:id', 'InstitutionController.update').middleware(
     'auth'
   )

@@ -15,8 +15,6 @@ class InstitutionController {
     })
   }
 
-  async create({ request, response, view }) {}
-
   async store({ request, response, auth }) {
     const user_id = auth.user.id
     const { name } = request.all()
@@ -29,9 +27,14 @@ class InstitutionController {
     })
   }
 
-  async show({ params, request, response, view }) {}
+  async show({ params, response }) {
+    const institution = await Institution.findOrFail(params.id)
 
-  async edit({ params, request, response, view }) {}
+    return response.json({
+      data: institution,
+      message: 'Ok'
+    })
+  }
 
   async update({ params, request, response }) {
     const institution = await Institution.findOrFail(params.id)
