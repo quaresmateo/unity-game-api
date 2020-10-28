@@ -57,10 +57,11 @@ Route.group(() => {
   Route.get('/instituicoes', 'InstitutionController.index')
 
   // Groups routes
-  Route.post('/grupos', 'GroupController.store').middleware('auth')
-  Route.get('/grupos', 'GroupController.index').middleware('auth')
-  Route.put('/grupos/:id', 'GroupController.update').middleware('auth')
-  Route.delete('/grupos/:id', 'GroupController.destroy').middleware('auth')
+  Route.post('/grupo', 'GroupController.store').middleware('auth')
+  Route.get('/grupo', 'GroupController.index').middleware('auth')
+  Route.get('/grupo/:id', 'GroupController.show').middleware('auth')
+  Route.put('/grupo/:id', 'GroupController.update').middleware('auth')
+  Route.delete('/grupo/:id', 'GroupController.destroy').middleware('auth')
 
   // Category routes
   Route.get('/categoria', 'CategoryController.index').middleware('auth')
