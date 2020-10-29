@@ -46,11 +46,27 @@ class GroupController {
     })
   }
 
-  async show({ params, request, response, view }) {}
+  async show({ params, response }) {
+    const group = await Group.findOrFail(params.id)
 
-  async edit({ params, request, response, view }) {}
+    return response.json({
+      data: group,
+      message: 'OK'
+    })
+  }
 
-  async update({ params, request, response }) {}
+  async update({ params, request, response }) {
+    const group = await Group.findOrFail(params.id)
+    const groupOldName = group.name
+
+    group.merge(request.only(['name']))
+    group.save()
+
+    return response.json({
+      data: group,
+      message: `Grupo '${groupOldName}' foi atualizado para '${group.name}'`
+    })
+  }
 
   async destroy({ params, response }) {
     const group = await Group.findOrFail(params.id)

@@ -28,8 +28,6 @@ class PlayerController {
     })
   }
 
-  async create({ request, response, view }) {}
-
   async store({ request, response, auth }) {
     const user = await auth.getUser()
     const user_id = user.id
@@ -52,13 +50,48 @@ class PlayerController {
     })
   }
 
-  async show({ params, request, response, view }) {}
+  async show({ params, response }) {
+    const player = await Player.findOrFail(params.id)
 
-  async edit({ params, request, response, view }) {}
+    return response.json({
+      data: player,
+      message: 'Ok'
+    })
+  }
 
-  async update({ params, request, response }) {}
+  async update({ params, request, response }) {
+    const player = await Player.findOrFail(params.id)
+    const playerOldName = player.username
 
-  async destroy({ params, request, response }) {}
+    player.merge(
+      request.only([
+        'username',
+        'fullname',
+        'identification',
+        'date_of_birth',
+        'kind_of_handicap',
+        'diagnosis'
+      ])
+    )
+
+    player.save()
+
+    return response.json({
+      message: `Dado(s) de ${playerOldName} alterado(s)`,
+      data: player
+    })
+  }
+
+  async destroy({ params, response }) {
+    const player = await Player.findOrFail(params.id)
+    const { username } = player
+
+    await player.delete()
+
+    return response.json({
+      message: `O jogador ${username} foi excluído`
+    })
+  }
 }
 
 module.exports = PlayerController

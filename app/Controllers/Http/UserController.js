@@ -27,10 +27,20 @@ class UserController {
     return response.json(user)
   }
 
-  async show({ auth, response }) {
+  async me({ auth, response }) {
     const user = await auth.getUser()
     return response.json({
-      data: user
+      data: user,
+      message: 'Ok'
+    })
+  }
+
+  async show({ params, response }) {
+    const user = await User.findOrFail(params.id)
+
+    return response.json({
+      data: user,
+      message: 'Ok'
     })
   }
 
@@ -101,6 +111,17 @@ class UserController {
 
     return response.status(200).json({
       message: 'atualizado com sucesso'
+    })
+  }
+
+  async destroy({ params, response }) {
+    const user = await User.findOrFail(params.id)
+    const name = user.fullname
+
+    await user.delete()
+
+    return response.json({
+      message: `Usuário '${name}' deletado`
     })
   }
 }

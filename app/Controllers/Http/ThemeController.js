@@ -23,7 +23,6 @@ class ThemeController {
     const data = { ...request.only(['name']), user_id }
     const theme = await Theme.create(data)
     const { groups_id: groups } = request.all()
-    console.log(groups)
 
     groups.forEach(async (group_id) => {
       const group = await Group.findOrFail(group_id)
@@ -39,11 +38,33 @@ class ThemeController {
     })
   }
 
-  async show({ params, request, response, view }) {}
+  async show({ params, response }) {
+    const theme = await Theme.findOrFail(params.id)
 
-  async edit({ params, request, response, view }) {}
+    return response.json({
+      data: theme,
+      message: 'Ok'
+    })
+  }
 
-  async update({ params, request, response }) {}
+  async update({ params, request, response }) {
+    const theme = await Theme.findOrFail(params.id)
+    const themeOldName = theme.name
+    const { groups_id: groups } = request.all()
+
+    groups.forEach(async (group_id) => {
+      const group = await Group.findOrFail(group_id)
+      await theme.groups().sync([group.id])
+    })
+
+    theme.merge(request.only(['name']))
+    theme.save()
+
+    return response.json({
+      data: theme,
+      message: `Tema '${themeOldName}' foi atualizado para '${theme.name}'`
+    })
+  }
 
   async destroy({ params, response }) {
     const theme = await Theme.findOrFail(params.id)
