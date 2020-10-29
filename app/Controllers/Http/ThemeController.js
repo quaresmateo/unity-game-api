@@ -38,7 +38,14 @@ class ThemeController {
     })
   }
 
-  async show({ params, request, response, view }) {}
+  async show({ params, response }) {
+    const theme = await Theme.findOrFail(params.id)
+
+    return response.json({
+      data: theme,
+      message: 'Ok'
+    })
+  }
 
   async update({ params, request, response }) {
     const theme = await Theme.findOrFail(params.id)
