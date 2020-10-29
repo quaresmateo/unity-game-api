@@ -27,10 +27,20 @@ class UserController {
     return response.json(user)
   }
 
-  async show({ auth, response }) {
+  async me({ auth, response }) {
     const user = await auth.getUser()
     return response.json({
-      data: user
+      data: user,
+      message: 'Ok'
+    })
+  }
+
+  async show({ params, response }) {
+    const user = await User.findOrFail(params.id)
+
+    return response.json({
+      data: user,
+      message: 'Ok'
     })
   }
 
