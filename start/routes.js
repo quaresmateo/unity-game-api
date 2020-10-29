@@ -42,14 +42,15 @@ Route.group(() => {
   Route.delete('/jogador/:id', 'PlayerController.destroy').middleware('auth')
 
   // Themes routes
+  Route.post('/tema', 'ThemeController.store').middleware('auth')
   Route.get('/tema', 'ThemeController.index').middleware('auth')
   Route.get('/tema/:id', 'ThemeController.show').middleware('auth')
-  Route.post('/tema', 'ThemeController.store').middleware('auth')
-  Route.delete('/tema/:id', 'ThemeController.destroy').middleware('auth')
   Route.put('/tema/:id', 'ThemeController.update').middleware('auth')
+  Route.delete('/tema/:id', 'ThemeController.destroy').middleware('auth')
 
   // Institution routes
   Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
+  Route.get('/instituicao', 'InstitutionController.index')
   Route.get('/instituicao/:id', 'InstitutionController.show').middleware('auth')
   Route.put('/instituicao/:id', 'InstitutionController.update').middleware(
     'auth'
@@ -57,7 +58,6 @@ Route.group(() => {
   Route.delete('/instituicao/:id', 'InstitutionController.destroy').middleware(
     'auth'
   )
-  Route.get('/instituicao', 'InstitutionController.index')
 
   // Groups routes
   Route.post('/grupo', 'GroupController.store').middleware('auth')
@@ -67,8 +67,8 @@ Route.group(() => {
   Route.delete('/grupo/:id', 'GroupController.destroy').middleware('auth')
 
   // Category routes
-  Route.get('/categoria', 'CategoryController.index').middleware('auth')
   Route.post('/categoria', 'CategoryController.store').middleware('auth')
+  Route.get('/categoria', 'CategoryController.index').middleware('auth')
   Route.get('/categoria/:id', 'CategoryController.show').middleware('auth')
   Route.put('/categoria/:id', 'CategoryController.update').middleware('auth')
   Route.delete('/categoria/:id', 'CategoryController.destroy').middleware(
