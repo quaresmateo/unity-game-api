@@ -19,7 +19,7 @@ adonis new yardstick --api-only
 ou clone manualmente o repo e execute `npm install`.
 
 
-### Migrações
+## Migrações
 
 Execute o seguinte comando para executar migrações de inicialização.
 
