@@ -3,10 +3,10 @@
 Este é o padrão para a criação de um servidor API em AdonisJs, ele vem pré-configurado.
 
 1. Bodyparser
-2. Authentication
+2. Autenticação
 3. CORS
 4. Lucid ORM
-5. Migrations and seeds
+5. Migrações e sementes
 
 ## Configuração
 
