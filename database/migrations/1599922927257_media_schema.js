@@ -8,6 +8,7 @@ class MediaSchema extends Schema {
     this.create('media', (table) => {
       table.increments()
       table.string('extension').notNullable()
+      table.string('name').notNullable()
       table.string('local_layout').notNullable()
       table.integer('theme_id').unsigned()
       table.timestamps()

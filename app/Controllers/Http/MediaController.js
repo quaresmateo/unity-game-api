@@ -5,7 +5,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 class MediaController {
-  index({ request, response }) {}
+  async index({ request, response }) {}
 
   async create({ request, response }) {}
 
