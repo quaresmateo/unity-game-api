@@ -76,7 +76,7 @@ Route.group(() => {
   )
 
   // Media routes
-  Route.post('/media/tema/:theme_id', 'MediaController.store').middleware(
+  Route.post('/midia/tema/:theme_id', 'MediaController.store').middleware(
     'auth'
   )
 }).prefix('api/v1')
