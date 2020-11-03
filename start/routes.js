@@ -74,4 +74,9 @@ Route.group(() => {
   Route.delete('/categoria/:id', 'CategoryController.destroy').middleware(
     'auth'
   )
+
+  // Media routes
+  Route.post('/media/tema/:theme_id', 'MediaController.store').middleware(
+    'auth'
+  )
 }).prefix('api/v1')
