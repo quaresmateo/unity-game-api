@@ -22,9 +22,9 @@ class MediaController {
     const { type, clientName: name } = file
     const src = `/assets/tema/${theme_id}/${type}/`
 
-    await file.move(Helpers.resourcesPath(src))
+    await file.move(Helpers.resourcesPath(src), { overwrite: true })
 
-    if (!profilePics.errors()) {
+    if (file.error()) {
       const media = await Media.create({
         name,
         type,
