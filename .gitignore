@@ -1,8 +1,9 @@
 # Node modules
 node_modules
 
-# Adonis directory for storing tmp files
+# Adonis directory for storing tmp and resources files
 tmp
+resources
 
 # Environment variables, never commit this file
 .env
