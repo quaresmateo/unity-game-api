@@ -4,6 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 const Helpers = use('Helpers')
+const Drive = use('Drive')
 const Media = use('App/Models/Media')
 
 class MediaController {
@@ -25,8 +26,6 @@ class MediaController {
     })
   }
 
-  async create({ request, response }) {}
-
   async store({ params, request, response }) {
     const { theme_id } = params
     const { local_layout } = request.all()
@@ -37,14 +36,9 @@ class MediaController {
 
     const { type, clientName: name } = file
 
-    await file.move(
-      Helpers.resourcesPath(`/assets/tema/${theme_id}/${type}/`),
-      { overwrite: true }
-    )
+    await file.move(Helpers.tmpPath(`/tema/${theme_id}/${type}/`))
 
-    const src = `${Helpers.resourcesPath(
-      `/assets/tema/${theme_id}/${type}/${name}`
-    )}`
+    const src = `${Helpers.tmpPath(`/tema/${theme_id}/${type}/${name}`)}`
 
     if (file.error()) {
       const media = await Media.create({
@@ -62,13 +56,37 @@ class MediaController {
     }
   }
 
-  async show({ params, request, response }) {}
-
   async edit({ params, request, response }) {}
 
   async update({ params, request, response }) {}
 
-  async destroy({ params, request, response }) {}
+  async destroy({ request, response }) {
+    const { media_id, media_name, local_layout } = request.all()
+
+    if (media_id || media_name || local_layout) {
+      const medias = await Media.query()
+        .whereId(media_id)
+        .whereName(media_name)
+        .whereLocalLayout(local_layout)
+        .fetch()
+
+      const media = medias.toJSON()[0]
+      console.log(media)
+
+      const fileName = media.name
+      const fileId = media.id
+      const targetMedia = await Media.find(fileId)
+      await Drive.delete(targetMedia.src)
+      await targetMedia.delete()
+
+      return response.json({
+        message: `${fileName} deletado`
+      })
+    }
+    return response.status(404).json({
+      message: 'Nenhum arquivo encontrado'
+    })
+  }
 }
 
 module.exports = MediaController
