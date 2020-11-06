@@ -7,7 +7,19 @@ const Helpers = use('Helpers')
 const Media = use('App/Models/Media')
 
 class MediaController {
-  async index({ request, response }) {}
+  async index({ params, request, response }) {
+    const { type, theme_id } = params
+
+    const medias = await Media.query()
+      .where('type', type)
+      .where('theme_id', theme_id)
+      .fetch()
+
+    return response.json({
+      message: 'Ok',
+      data: medias
+    })
+  }
 
   async create({ request, response }) {}
 
@@ -20,9 +32,15 @@ class MediaController {
     })
 
     const { type, clientName: name } = file
-    const src = `/assets/tema/${theme_id}/${type}/`
 
-    await file.move(Helpers.resourcesPath(src), { overwrite: true })
+    await file.move(
+      Helpers.resourcesPath(`/assets/tema/${theme_id}/${type}/`),
+      { overwrite: true }
+    )
+
+    const src = `${Helpers.resourcesPath(
+      `/assets/tema/${theme_id}/${type}/${name}`
+    )}`
 
     if (file.error()) {
       const media = await Media.create({
