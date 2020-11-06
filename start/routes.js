@@ -83,4 +83,5 @@ Route.group(() => {
     'auth'
   )
   Route.delete('/midia', 'MediaController.destroy').middleware('auth')
+  Route.put('/midia', 'MediaController.update').middleware('auth')
 }).prefix('api/v1')
