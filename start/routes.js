@@ -82,4 +82,5 @@ Route.group(() => {
   Route.get('/midia/tema/:theme_id/:type', 'MediaController.index').middleware(
     'auth'
   )
+  Route.delete('/midia', 'MediaController.destroy').middleware('auth')
 }).prefix('api/v1')
