@@ -89,6 +89,7 @@ class MediaController {
         )
         // prettier-ignore
         const src = `${Helpers.tmpPath(`/tema/${targetMedia.theme_id}/${file.type}/${file.clientName}`)}`
+        await Drive.delete(targetMedia.src)
 
         targetMedia.merge({
           src,
@@ -105,12 +106,12 @@ class MediaController {
         const targetMedia = await Media.findOrFail(media.id)
         const mediaOldName = targetMedia.local_layout
 
-        targetMedia.merge(local_layout)
+        targetMedia.merge({ local_layout })
         targetMedia.save()
 
         return response.json({
           data: targetMedia,
-          message: `Mídia '${mediaOldName}' foi atualizada para '${targetMedia.local_layout}'`
+          message: `Local de mídia '${mediaOldName}' foi atualizada para '${targetMedia.local_layout}'`
         })
       }
     }
