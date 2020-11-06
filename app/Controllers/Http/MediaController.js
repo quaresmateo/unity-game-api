@@ -56,8 +56,6 @@ class MediaController {
     }
   }
 
-  async edit({ params, request, response }) {}
-
   async update({ params, request, response }) {}
 
   async destroy({ request, response }) {
@@ -71,7 +69,6 @@ class MediaController {
         .fetch()
 
       const media = medias.toJSON()[0]
-      console.log(media)
 
       const fileName = media.name
       const fileId = media.id
