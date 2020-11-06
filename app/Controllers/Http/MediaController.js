@@ -9,11 +9,34 @@ const Media = use('App/Models/Media')
 class MediaController {
   async index({ params, request, response }) {
     const { type, theme_id } = params
+    const { media_id, media_name, local_layout } = request.all()
+    let medias = null
 
-    const medias = await Media.query()
-      .where('type', type)
-      .where('theme_id', theme_id)
-      .fetch()
+    if (media_id) {
+      medias = await Media.query()
+        .where('type', type)
+        .where('theme_id', theme_id)
+        .where('id', media_id)
+        .fetch()
+      console.log('entrou', medias)
+    } else if (media_name) {
+      medias = await Media.query()
+        .where('type', type)
+        .where('theme_id', theme_id)
+        .where('name', media_name)
+        .fetch()
+    } else if (local_layout) {
+      medias = await Media.query()
+        .where('type', type)
+        .where('theme_id', theme_id)
+        .where('local_layout', local_layout)
+        .fetch()
+    } else {
+      medias = await Media.query()
+        .where('type', type)
+        .where('theme_id', theme_id)
+        .fetch()
+    }
 
     return response.json({
       message: 'Ok',
