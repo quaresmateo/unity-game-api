@@ -7,6 +7,11 @@ const Helpers = use('Helpers')
 const Drive = use('Drive')
 const Media = use('App/Models/Media')
 
+const fileOptions = {
+  types: ['image', 'audio', 'video'],
+  size: '10mb'
+}
+
 class MediaController {
   async index({ params, request, response }) {
     const { type, theme_id } = params
@@ -29,10 +34,7 @@ class MediaController {
   async store({ params, request, response }) {
     const { theme_id } = params
     const { local_layout } = request.all()
-    const file = request.file('file', {
-      types: ['image', 'audio', 'video'],
-      size: '10mb'
-    })
+    const file = request.file('file', fileOptions)
 
     const { type, clientName: name } = file
 
@@ -56,7 +58,67 @@ class MediaController {
     }
   }
 
-  async update({ params, request, response }) {}
+  async update({ request, response }) {
+    const {
+      media_id,
+      media_name,
+      local_layout_param,
+      local_layout
+    } = request.all()
+
+    const file = request.file('file', fileOptions)
+
+    if (media_id || media_name || local_layout_param) {
+      const medias = await Media.query()
+        .whereId(media_id)
+        .whereName(media_name)
+        .whereLocalLayout(local_layout_param)
+        .fetch()
+
+      const media = medias.toJSON()[0]
+
+      if (file) {
+        const fileName = media.name
+        const fileId = media.id
+        const targetMedia = await Media.findOrFail(fileId)
+
+        await file.move(
+          Helpers.tmpPath(`/tema/${targetMedia.theme_id}/${file.type}/`, {
+            rewrite: true
+          })
+        )
+        // prettier-ignore
+        const src = `${Helpers.tmpPath(`/tema/${targetMedia.theme_id}/${file.type}/${file.clientName}`)}`
+
+        targetMedia.merge({
+          src,
+          local_layout,
+          name: file.clientName,
+          type: file.type
+        })
+        targetMedia.save()
+
+        return response.json({
+          message: `${fileName} atualizado`
+        })
+      } else if (local_layout) {
+        const targetMedia = await Media.findOrFail(media.id)
+        const mediaOldName = targetMedia.local_layout
+
+        targetMedia.merge(local_layout)
+        targetMedia.save()
+
+        return response.json({
+          data: targetMedia,
+          message: `Mídia '${mediaOldName}' foi atualizada para '${targetMedia.local_layout}'`
+        })
+      }
+    }
+
+    return response.status(404).json({
+      message: 'Nenhum arquivo encontrado'
+    })
+  }
 
   async destroy({ request, response }) {
     const { media_id, media_name, local_layout } = request.all()
