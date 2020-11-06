@@ -79,4 +79,7 @@ Route.group(() => {
   Route.post('/midia/tema/:theme_id', 'MediaController.store').middleware(
     'auth'
   )
+  Route.get('/midia/tema/:theme_id/:type', 'MediaController.index').middleware(
+    'auth'
+  )
 }).prefix('api/v1')
