@@ -11,6 +11,10 @@ class Theme extends Model {
   groups() {
     return this.belongsToMany('App/Models/Group').pivotTable('groups_themes')
   }
+
+  medias() {
+    return this.hasMany('App/Models/Media')
+  }
 }
 
 module.exports = Theme
