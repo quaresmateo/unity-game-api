@@ -10,7 +10,7 @@ const Group = use('App/Models/Group')
 
 class ThemeController {
   async index({ request, response }) {
-    const theme = await Theme.all()
+    const theme = await Theme.query().with('medias').fetch()
 
     return response.json({
       data: theme,
