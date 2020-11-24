@@ -29,59 +29,63 @@ Route.group(() => {
 
   // User routes
   Route.get('/me', 'UserController.me').middleware('auth')
-  Route.get('/usuario/:id', 'UserController.show').middleware('auth')
-  Route.get('/usuario', 'UserController.index').middleware('auth')
-  Route.put('/usuario/:id', 'UserController.update').middleware('auth')
-  Route.delete('/usuario/:id', 'UserController.destroy').middleware('auth')
+  Route.get('/usuarios/:id', 'UserController.show').middleware('auth')
+  Route.get('/usuarios', 'UserController.index').middleware('auth')
+  Route.put('/usuarios/:id', 'UserController.update').middleware('auth')
+  Route.delete('/usuarios/:id', 'UserController.destroy').middleware('auth')
 
   // Player routes
-  Route.post('/jogador', 'PlayerController.store').middleware('auth')
-  Route.get('/jogador', 'PlayerController.index').middleware('auth')
-  Route.get('/jogador/:id', 'PlayerController.show').middleware('auth')
-  Route.put('/jogador/:id', 'PlayerController.update').middleware('auth')
-  Route.delete('/jogador/:id', 'PlayerController.destroy').middleware('auth')
+  Route.post('/jogadores', 'PlayerController.store').middleware('auth')
+  Route.get('/jogadores', 'PlayerController.index').middleware('auth')
+  Route.get('/jogadores/:id', 'PlayerController.show').middleware('auth')
+  Route.put('/jogadores/:id', 'PlayerController.update').middleware('auth')
+  Route.delete('/jogadores/:id', 'PlayerController.destroy').middleware('auth')
 
   // Themes routes
-  Route.post('/tema', 'ThemeController.store').middleware('auth')
-  Route.get('/tema', 'ThemeController.index').middleware('auth')
-  Route.get('/tema/:id', 'ThemeController.show').middleware('auth')
-  Route.put('/tema/:id', 'ThemeController.update').middleware('auth')
-  Route.delete('/tema/:id', 'ThemeController.destroy').middleware('auth')
+  Route.post('/temas', 'ThemeController.store').middleware('auth')
+  Route.get('/temas', 'ThemeController.index').middleware('auth')
+  Route.get('/temas/:id', 'ThemeController.show').middleware('auth')
+  Route.put('/temas/:id', 'ThemeController.update').middleware('auth')
+  Route.delete('/temas/:id', 'ThemeController.destroy').middleware('auth')
 
   // Institution routes
-  Route.post('/instituicao', 'InstitutionController.store').middleware('auth')
-  Route.get('/instituicao', 'InstitutionController.index')
-  Route.get('/instituicao/:id', 'InstitutionController.show').middleware('auth')
-  Route.put('/instituicao/:id', 'InstitutionController.update').middleware(
+  Route.post('/instituicoes', 'InstitutionController.store').middleware('auth')
+  Route.get('/instituicoes', 'InstitutionController.index')
+  Route.get('/instituicoes/:id', 'InstitutionController.show').middleware(
     'auth'
   )
-  Route.delete('/instituicao/:id', 'InstitutionController.destroy').middleware(
+  Route.put('/instituicoes/:id', 'InstitutionController.update').middleware(
+    'auth'
+  )
+  Route.delete('/instituicoes/:id', 'InstitutionController.destroy').middleware(
     'auth'
   )
 
   // Groups routes
-  Route.post('/grupo', 'GroupController.store').middleware('auth')
-  Route.get('/grupo', 'GroupController.index').middleware('auth')
-  Route.get('/grupo/:id', 'GroupController.show').middleware('auth')
-  Route.put('/grupo/:id', 'GroupController.update').middleware('auth')
-  Route.delete('/grupo/:id', 'GroupController.destroy').middleware('auth')
+  Route.post('/grupos', 'GroupController.store').middleware('auth')
+  Route.get('/grupos', 'GroupController.index').middleware('auth')
+  Route.get('/grupos/:id', 'GroupController.show').middleware('auth')
+  Route.put('/grupos/:id', 'GroupController.update').middleware('auth')
+  Route.delete('/grupos/:id', 'GroupController.destroy').middleware('auth')
 
   // Category routes
-  Route.post('/categoria', 'CategoryController.store').middleware('auth')
-  Route.get('/categoria', 'CategoryController.index').middleware('auth')
-  Route.get('/categoria/:id', 'CategoryController.show').middleware('auth')
-  Route.put('/categoria/:id', 'CategoryController.update').middleware('auth')
-  Route.delete('/categoria/:id', 'CategoryController.destroy').middleware(
+  Route.post('/categorias', 'CategoryController.store').middleware('auth')
+  Route.get('/categorias', 'CategoryController.index').middleware('auth')
+  Route.get('/categorias/:id', 'CategoryController.show').middleware('auth')
+  Route.put('/categorias/:id', 'CategoryController.update').middleware('auth')
+  Route.delete('/categorias/:id', 'CategoryController.destroy').middleware(
     'auth'
   )
 
   // Media routes
-  Route.post('/midia/tema/:theme_id', 'MediaController.store').middleware(
+  Route.post('/midias/tema/:theme_id', 'MediaController.store').middleware(
     'auth'
   )
-  Route.get('/midia/tema/:theme_id/:type', 'MediaController.index').middleware(
-    'auth'
-  )
-  Route.delete('/midia', 'MediaController.destroy').middleware('auth')
-  Route.put('/midia', 'MediaController.update').middleware('auth')
+  ;('auth')
+  Route.get(
+    '/midias/tema/:theme_id/:type',
+    'MediaController.index'
+  ).middleware()
+  Route.delete('/midias', 'MediaController.destroy').middleware('auth')
+  Route.put('/midias', 'MediaController.update').middleware('auth')
 }).prefix('api/v1')
